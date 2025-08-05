@@ -1,5 +1,3 @@
--- ~/.config/nvim/lua/plugins/omnisharp.lua
-
 return {
   {
     "OmniSharp/omnisharp-vim",

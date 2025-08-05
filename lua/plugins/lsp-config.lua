@@ -64,6 +64,21 @@ return {
         capabilities = capabilities,
       })
 
+      -- setup the C# OmniSharp language server
+      --lspconfig.omnisharp.setup({
+      --  capabilities = capabilities,
+      --  cmd = {
+      --    "dotnet",
+      --    "/home/lucasfend/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll"
+      --  },
+      --  enable_import_completion = true,
+      --  organize_imports_on_format = true,
+      --  enable_roslyn_analyzers = true,
+      --  handlers = {
+      --    ["textDocument/definition"] = require("omnisharp_extended").handler,
+      --  },
+      --})
+
       -- Set vim motion for <Space> + c + h to show code documentation about the code the cursor is currently over if available
       vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "[C]ode [H]over Documentation" })
       -- Set vim motion for <Space> + c + d to go where the code/variable under the cursor was defined
