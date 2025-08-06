@@ -40,7 +40,7 @@ return {
           -- menuone: automatically select the first option of the menu
           -- preview: automatically display the completion candiate as you navigate the menu
           -- noselect: prevent neovim from automatically selecting a completion option while navigating the menu
-          competeopt = "menu,menuone,preview,noselect",
+          competeopt = "menu,menuone,noinsert,noselect",
         },
         -- setup snippet support based on the active lsp and the current text of the file
         snippet = {
@@ -49,22 +49,29 @@ return {
           end,
         },
         -- setup how we interact with completion menus and options
+        
         mapping = cmp.mapping.preset.insert({
-          -- previous suggestion
           ["<C-k>"] = cmp.mapping.select_prev_item(),
-          -- next suggestion
           ["<C-j>"] = cmp.mapping.select_next_item(),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          -- show completion suggestions
-          -- close completion window
           ["<C-e>"] = cmp.mapping.abort(),
-          -- confirm completion, only when you explicitly selected an option
-          ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = false,
-          }),
+
+          
+          
+["<CR>"] = cmp.mapping(function(fallback)
+  if cmp.visible() then
+    if cmp.get_selected_entry() then
+      cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
+    else
+      cmp.confirm({ select = false })
+    end
+  else
+    fallback() -- deixa o Enter funcionar como o padrão do Neovim
+  end
+end, { "i", "s" }),
         }),
+
         -- Where and how should cmp rank and find completions
         -- Order matters, cmp will provide lsp suggestions above all else
         sources = cmp.config.sources({
