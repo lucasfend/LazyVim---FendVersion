@@ -13,3 +13,14 @@ vim.cmd([[
     autocmd FileType typescript,javascript,angular lua require('config.tsls').setup()
   augroup end
 ]])
+
+local group = vim.api.nvim_create_augroup("AvanteColors", { clear = true })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = group,
+  pattern = "*",
+  callback = function()
+    require("config.avante_colors")
+  end,
+})
+

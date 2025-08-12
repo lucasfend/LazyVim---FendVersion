@@ -1,25 +1,14 @@
 return {
   {
-    "ellisonleao/gruvbox.nvim",
-    priority = 1000, -- carrega antes de outros plugins
-    lazy = false,
-    config = function()
-      require("gruvbox").setup({
-        contrast = "hard", -- "soft", "medium", "hard"
-        palette_overrides = {},
-        overrides = {},
-        italic = {
-          strings = false,
-          emphasis = true,
-          comments = true,
-          operators = false,
-          folds = true,
-        },
-        bold = true,
-      })
-
-      vim.cmd("colorscheme gruvbox")
-    end,
-  },
+  "navarasu/onedark.nvim",
+  priority = 1000, -- make sure to load this before all the other start plugins
+  config = function()
+    require('onedark').setup {
+      style = 'deep'
+    }
+    -- Enable theme
+    require('onedark').load()
+  end
+  }
 }
 

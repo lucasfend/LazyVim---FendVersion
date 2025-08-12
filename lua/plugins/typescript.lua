@@ -2,12 +2,11 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      -- Comente isso se for usar typescript-tools
       require("lspconfig").tsserver.setup({})
       require("lspconfig").angularls.setup({})
     end,
   },
-
+  -- Optional: Install prettier for formatting
   {
     "nvimtools/none-ls.nvim",
     opts = function()
@@ -15,22 +14,10 @@ return {
       return {
         sources = {
           null_ls.builtins.formatting.prettier.with({
-            filetypes = {
-              "typescript", "typescriptreact", "javascript",
-              "html", "css", "scss"
-            },
+            filetypes = { "typescript", "javascript" },
           }),
         },
       }
     end,
   },
-
-  -- Alternativa moderna ao tsserver
-  -- Descomente isso se quiser usar em vez de tsserver
-  -- {
-  --   "pmizio/typescript-tools.nvim",
-  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-  --   opts = {},
-  -- },
 }
-
